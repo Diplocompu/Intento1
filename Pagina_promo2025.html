@@ -1,0 +1,91 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagina Promo 2025</title>
+  <style>
+    body {
+      background-color: #d5ecf6;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .contenedor-cuadros,
+    .contenedor-cuadros2 {
+      display: flex;
+      justify-content: start;
+      gap: 40px;
+      margin-top: 30px;
+      padding-left: 25px;
+    }
+
+    .cuadro {
+      width: 350px;
+      height: 200px;
+      background-color: blue;
+      color: white;
+      padding: 50px;
+      border: 2px solid white;
+      border-radius: 10px;
+      font-size: 25px;
+      text-align: center;
+      font-family: Arial;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .cuadro:hover {
+      transform: scale(1.05);
+    }
+
+    /* 🌐 Diseño responsivo para móviles */
+    @media (max-width: 768px) {
+      .contenedor-cuadros,
+      .contenedor-cuadros2 {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        gap: 20px;
+      }
+
+      .cuadro {
+        width: 90%;
+        font-size: 20px;
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contenedor-cuadros">
+    <a href="segunda.html" class="cuadro">
+      <p>Tutoriales</p>
+    </a>
+    <a href="Tercera.html" class="cuadro">
+      <p>Material de Apoyo</p>
+    </a>
+    <a href="cuarta.html" class="cuadro">
+      <p>Fotos</p>
+    </a>
+  </div>
+
+  <div class="contenedor-cuadros2">
+    <a href="cinco.html" class="cuadro">
+      <p>Proyectos del año</p>
+    </a>
+    <a href="seis.html" class="cuadro">
+      <p>Promocion (memes)</p>
+    </a>
+    <a href="siete.html" class="cuadro">
+      <p>Anecdotas</p>
+    </a>
+  </div>
+
+</body>
+</html>
+
