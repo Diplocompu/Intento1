@@ -1,0 +1,229 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagina Promo 2025</title>
+  <style>
+    body {
+      background-color: #d5ecf6;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .contenedor-superior {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background-color: blue;
+      color: white;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      background-color: black;
+      border-radius: 10px;
+      margin-right: 20px;
+    }
+
+    .titulo {
+      font-size: 28px;
+      font-weight: bold;
+      flex-grow: 1;
+    }
+
+    .botones-encabezado {
+      display: flex;
+      gap: 15px;
+    }
+
+    .btn-encabezado {
+      background-color: white;
+      color: blue;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn-encabezado:hover {
+      background-color: #e0e0e0;
+      transform: scale(1.05);
+    }
+
+    .zona-principal {
+      display: flex;
+      margin-top: 0;
+      padding: 0 20px 40px;
+      gap: 30px;
+      padding-left: 0;
+    }
+
+    .cuadro-lateral {
+      width: 200px;
+      background-color: black;
+      color: white;
+      padding: 20px;
+      border-radius: 0;
+      font-size: 20px;
+      text-align: center;
+      height: auto;
+    }
+
+    .contenedor-cuadros {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      flex-grow: 1;
+    }
+
+    .cuadro {
+      width: auto;
+      height: 200px;
+      background-color: blue;
+      color: white;
+      padding: 25px;
+      border: 2px solid white;
+      border-radius: 10px;
+      font-size: 25px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .cuadro:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .contenedor-superior {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .botones-encabezado {
+        margin-top: 10px;
+      }
+
+      .zona-principal {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .cuadro-lateral {
+        width: 90%;
+        margin-bottom: 20px;
+      }
+
+      .contenedor-cuadros {
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+
+      .cuadro {
+        width: 90%;
+        font-size: 20px;
+        padding: 30px;
+      }
+    }
+    
+    .popup {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 250px;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8);
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.5s;
+            cursor: pointer; /* Hace que el cuadro sea clickeable */
+        }
+    
+            @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .popup img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .close-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: block;
+        }
+
+  </style>
+</head>
+<body>
+    
+    <div id="popup" class="popup" onclick="goToPage()">
+        <h3>¡Oferta Especial! 🎉</h3>
+        <img id="popup-image" src="publicidad3.jpg" alt="Publicidad">
+        <button class="close-btn" onclick="event.stopPropagation(); closePopup()">Cerrar ❌</button>
+    </div>
+
+    <script>
+        function showPopup() {
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function goToPage() {
+            window.location.href = "https://www.instagram.com/cerb_15?igsh=cjlua2hxdHUzb3h5";
+        }
+
+        setInterval(showPopup, 10000);
+    </script>
+
+  <div class="contenedor-superior">
+    <div style="display: flex; align-items: center;">
+      <div class="logo"></div>
+      <div class="titulo">Pagina Promo 2025</div>
+    </div>
+      <div class="botones-encabezado">
+      <a href="Pagina_promos.html" class="btn-encabezado">Inicio</a>
+      <a href="Ayuda.html" class="btn-encabezado">Contacto</a>
+  </div>
+  </div>
+
+  <div class="zona-principal">
+    <div class="cuadro-lateral">
+      <p>Información General</p>
+      <p>Noticias, enlaces útiles, y más.</p>
+    </div>
+
+    <div class="contenedor-cuadros">
+      <a href="segunda.html" class="cuadro"><p>Tutoriales</p></a>
+      <a href="Tercera.html" class="cuadro"><p>Material de Apoyo</p></a>
+      <a href="cuarta.html" class="cuadro"><p>Fotos</p></a>
+      <a href="cinco.html" class="cuadro"><p>Proyectos del año</p></a>
+      <a href="seis.html" class="cuadro"><p>Promocion (memes)</p></a>
+      <a href="siete.html" class="cuadro"><p>Anecdotas</p></a>
+    </div>
+  </div>
+
+</body>
+</html>
