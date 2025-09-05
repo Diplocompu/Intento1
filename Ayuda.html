@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preguntas Abiertas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef2f5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .formulario, .preguntas {
+      max-width: 600px;
+      margin: auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    textarea, input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .pregunta {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .respuesta {
+      margin-top: 10px;
+      background-color: #f1f1f1;
+      padding: 10px;
+      border-radius: 5px;
+      color: #333;
+    }
+
+    .boton-regreso {
+      display: block;
+      width: fit-content;
+      margin: 30px auto 10px;
+      background-color: #28a745;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .boton-regreso:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Preguntas Abiertas</h1>
+
+  <a href="index.html" class="boton-regreso">⬅ Regresar a Inicio</a>
+
+  <div class="formulario">
+    <label for="nombre">Tu nombre:</label>
+    <input type="text" id="nombre" placeholder="Escribe tu nombre">
+
+    <label for="pregunta">Tu pregunta:</label>
+    <textarea id="pregunta" rows="4" placeholder="Escribe tu pregunta aquí..."></textarea>
+
+    <button onclick="enviarPregunta()">Enviar Pregunta</button>
+  </div>
+
+  <div class="preguntas" id="listaPreguntas">
+    <!-- Las preguntas aparecerán aquí -->
+  </div>
+
+  <script>
+    let preguntasGuardadas = JSON.parse(localStorage.getItem("preguntas")) || [];
+
+    function mostrarPreguntas() {
+      document.getElementById("listaPreguntas").innerHTML = "";
+      preguntasGuardadas.forEach(p => {
+        const contenedor = document.createElement("div");
+        contenedor.className = "pregunta";
+        contenedor.innerHTML = `
+          <strong>${p.nombre} pregunta:</strong>
+          <p>${p.pregunta}</p>
+          <div class="respuesta" id="respuesta-${p.id}">
+            ${p.respuesta ? `<strong>Respuesta publicada:</strong><p>${p.respuesta}</p>` : `
+              <textarea id="respuesta-input-${p.id}" rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+              <button onclick="publicarRespuesta('${p.id}')">Publicar Respuesta</button>
+            `}
+          </div>
+        `;
+        document.getElementById("listaPreguntas").appendChild(contenedor);
+      });
+    }
+
+    function enviarPregunta() {
+      const nombre = document.getElementById("nombre").value.trim();
+      const pregunta = document.getElementById("pregunta").value.trim();
+
+      if (nombre === "" || pregunta === "") {
+        alert("Por favor, completa ambos campos.");
+        return;
+      }
+
+      const nuevaPregunta = {
+        id: Date.now().toString(),
+        nombre,
+        pregunta,
+        respuesta: ""
+      };
+
+      preguntasGuardadas.push(nuevaPregunta);
+      localStorage.setItem("preguntas", JSON.stringify(preguntasGuardadas));
+      mostrarPreguntas();
+
+      document.getElementById("nombre").value = "";
+      document.getElementById("pregunta").value = "";
+    }
+
+    function publicarRespuesta(id) {
+      const respuestaTexto = document.getElementById(`respuesta-input-${id}`).value.trim();
+      if (respuestaTexto === "") {
+        alert("Escribe una respuesta antes de publicar.");
+        return;
+      }
+
+      const index = preguntasGuardadas.findIndex(p => p.id === id);
+      preguntasGuardadas[index].respuesta = respuestaTexto;
+      localStorage.setItem("preguntas", JSON.stringify(preguntasGuardadas));
+      mostrarPreguntas();
+    }
+
+    // Mostrar preguntas al cargar la página
+    mostrarPreguntas();
+  </script>
+
+</body>
+</html>
