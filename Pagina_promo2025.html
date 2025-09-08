@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Promo 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1B5A5C 0%, #2C7A7B 25%, #4FD1C7 75%, #9DECF9 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contenedor-superior {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 40px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 40px rgba(27, 90, 92, 0.3);
+            margin: 30px auto;
+            width: 90%;
+            max-width: 1200px;
+            border-radius: 20px;
+            animation: containerFadeIn 1s ease-out;
+            position: relative;
+        }
+        
+        .contenedor-superior::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4FD1C7, #9DECF9, #4FD1C7, transparent);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #9DECF9, #4FD1C7);
+            border-radius: 10px;
+            margin-right: 20px;
+            box-shadow: 0 5px 20px rgba(79, 209, 199, 0.5);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .titulo {
+            font-size: 2rem;
+            font-weight: 300;
+            flex-grow: 1;
+            background: linear-gradient(135deg, #ffffff, #9DECF9, #4FD1C7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .botones-encabezado {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-encabezado {
+            background: #4FD1C7;
+            color: #1B5A5C;
+            border: 1px solid #1B5A5C;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(27, 90, 92, 0.5);
+            font-size: 0.95rem;
+        }
+
+        .btn-encabezado:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #2C7A7B, #1B5A5C);
+            color: white;
+            box-shadow: 0 12px 35px rgba(44, 122, 123, 0.7);
+            border-color: rgba(79, 209, 199, 0.9);
+        }
+
+        .zona-principal {
+            display: flex;
+            margin-top: 50px;
+            padding: 0 40px 40px;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .cuadro-lateral {
+            width: 250px;
+            background: linear-gradient(45deg, #9DECF9, #4FD1C7);
+            backdrop-filter: blur(15px);
+            border: none;
+            border-radius: 20px;
+            padding: 30px;
+            font-size: 1.1rem;
+            text-align: center;
+            height: auto;
+            box-shadow: 0 15px 40px rgba(79, 209, 199, 0.4);
+        }
+        
+        .cuadro-lateral p:first-of-type {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #1B5A5C, #2C7A7B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .cuadro-lateral p:last-of-type {
+            font-size: 0.9rem;
+            color: #1B5A5C;
+            opacity: 0.8;
+        }
+
+        .contenedor-cuadros {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            flex-grow: 1;
+        }
+
+        .cuadro {
+            height: 200px;
+            background: linear-gradient(135deg, rgba(120, 235, 250, 0.8), rgba(80, 235, 220, 0.8));
+            backdrop-filter: blur(15px);
+            color: white;
+            padding: 25px;
+            border: none;
+            border-radius: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(79, 209, 199, 0.5);
+            position: relative;
+        }
+        
+        .cuadro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4FD1C7, #9DECF9, #4FD1C7, transparent);
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .cuadro:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(79, 209, 199, 0.6);
+        }
+
+        .cuadro p {
+            margin: 0;
+            font-weight: 300;
+            background: linear-gradient(90deg, #1B5A5C, #2C7A7B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(79, 209, 199, 0.4);
+            border-radius: 50%;
+            animation: particleDrift 12s infinite linear;
+        }
+
+        .particle:nth-child(3n) {
+            background: rgba(157, 236, 249, 0.3);
+            width: 2px;
+            height: 2px;
+        }
+
+        .particle:nth-child(5n) {
+            background: rgba(167, 243, 208, 0.4);
+            animation-duration: 15s;
+        }
+        
+        .popup {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 280px;
+            background: rgba(27, 90, 92, 0.85);
+            backdrop-filter: blur(15px);
+            color: #f0fdfa;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(27, 90, 92, 0.5);
+            border: 1px solid rgba(79, 209, 199, 0.4);
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .popup h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #9DECF9, #4FD1C7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .popup img {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid rgba(79, 209, 199, 0.3);
+        }
+
+        .close-btn {
+            background-color: #e53e3e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background-color: #c53030;
+        }
+
+        @keyframes containerFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes particleDrift {
+            0% {
+                transform: translateY(100vh) translateX(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(100px) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contenedor-superior {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+            
+            .titulo {
+                font-size: 1.5rem;
+                margin-top: 10px;
+            }
+            
+            .botones-encabezado {
+                margin-top: 15px;
+            }
+
+            .zona-principal {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                margin-top: 20px;
+                gap: 20px;
+            }
+
+            .cuadro-lateral {
+                width: 100%;
+                margin-bottom: 0;
+            }
+
+            .contenedor-cuadros {
+                grid-template-columns: 1fr;
+                width: 100%;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-particles" id="particles"></div>
+    
+    <div id="popup" class="popup" onclick="goToPage()">
+        <h3>¡Oferta Especial! 🎉</h3>
+        <img id="popup-image" src="publicidad3.jpg" alt="Publicidad">
+        <button class="close-btn" onclick="event.stopPropagation(); closePopup()">Cerrar ❌</button>
+    </div>
+
+    <script>
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const colors = [
+                'rgba(79, 209, 199, 0.4)',
+                'rgba(157, 236, 249, 0.3)',
+                'rgba(44, 122, 123, 0.3)',
+                'rgba(167, 243, 208, 0.4)'
+            ];
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 12 + 's';
+                particle.style.animationDuration = (Math.random() * 6 + 10) + 's';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                container.appendChild(particle);
+            }
+        }
+
+        function showPopup() {
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function goToPage() {
+            window.location.href = "https://www.instagram.com/cerb_15?igsh=cjlua2hxdHUzb3h5";
+        }
+
+        setInterval(showPopup, 10000);
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+        });
+    </script>
+
+    <div class="contenedor-superior">
+        <div style="display: flex; align-items: center;">
+            <div class="logo"></div>
+            <div class="titulo">Pagina Promo 2025</div>
+        </div>
+        <div class="botones-encabezado">
+            <a href="Pagina_promos.html" class="btn-encabezado">Inicio</a>
+            <a href="Ayuda.html" class="btn-encabezado">Contacto</a>
+        </div>
+    </div>
+
+    <div class="zona-principal">
+        <div class="cuadro-lateral">
+            <p>Información General</p>
+            <p>Noticias, enlaces útiles, y más.</p>
+        </div>
+
+        <div class="contenedor-cuadros">
+            <a href="segunda.html" class="cuadro"><p>Tutoriales</p></a>
+            <a href="Tercera.html" class="cuadro"><p>Material de Apoyo</p></a>
+            <a href="cuarta.html" class="cuadro"><p>Fotos</p></a>
+            <a href="cinco.html" class="cuadro"><p>Proyectos del año</p></a>
+            <a href="seis.html" class="cuadro"><p>Promocion (memes)</p></a>
+            <a href="siete.html" class="cuadro"><p>Anecdotas</p></a>
+        </div>
+    </div>
+</body>
+</html>

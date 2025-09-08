@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sin Servicio Técnico</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      color: #fff;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      animation: bounce 1.5s infinite;
+    }
+
+    p {
+      font-size: 1.5em;
+      margin-top: 10px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .emoji {
+      font-size: 4em;
+      animation: spin 4s linear infinite;
+      margin-top: 20px;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <h1>¡Sin servicio técnico!</h1>
+  <p>Pero no te preocupes... ¡aquí hay diversión garantizada! 😄</p>
+  <div class="emoji">🎉🛠️🎈</div>
+</body>
+</html>
