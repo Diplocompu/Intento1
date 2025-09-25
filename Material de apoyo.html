@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material de Apoyo - Diplomado en Computación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 20%, #4a6741 40%, #27ae60 70%, #2ecc71 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.08;
+            animation: floatAround 30s infinite linear;
+            color: #27ae60;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(25px);
+            box-shadow: 0 8px 32px rgba(39, 174, 96, 0.2);
+            padding: 25px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(39, 174, 96, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .logo-text {
+            color: white;
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .back-button {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(39, 174, 96, 0.4);
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 1fr 2.5fr;
+            gap: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            height: fit-content;
+            box-shadow: 0 15px 50px rgba(44, 62, 80, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #27ae60;
+        }
+
+        /* Upload Section */
+        .upload-section {
+            margin-bottom: 35px;
+        }
+
+        .upload-area {
+            border: 2px dashed #27ae60;
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.05), rgba(46, 204, 113, 0.03));
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.1), rgba(46, 204, 113, 0.05));
+            border-color: #2ecc71;
+            transform: translateY(-2px);
+        }
+
+        .upload-area.dragover {
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.15), rgba(46, 204, 113, 0.08));
+            border-color: #2ecc71;
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #27ae60;
+        }
+
+        .upload-text {
+            font-size: 1rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .upload-info {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            line-height: 1.4;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            margin: 6px 4px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.3);
+        }
+
+        .upload-btn.secondary {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #2c3e50;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ecf0f1;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #27ae60;
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        /* Content Area */
+        .content-area {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 50px rgba(44, 62, 80, 0.15);
+            min-height: 600px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            border: none;
+            background: rgba(39, 174, 96, 0.1);
+            color: #27ae60;
+            cursor: pointer;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            border: 1px solid rgba(39, 174, 96, 0.2);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .tab:hover:not(.active) {
+            background: rgba(39, 174, 96, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* Content Items */
+        .content-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .content-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 4px solid #27ae60;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(39, 174, 96, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .content-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(39, 174, 96, 0.15);
+            border-left-color: #2ecc71;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .item-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .item-meta {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .item-content {
+            color: #34495e;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .view-btn {
+            background: linear-gradient(135deg, #3498db, #5dade2);
+            color: white;
+        }
+
+        .view-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .delete-btn {
+            background: linear-gradient(135deg, #e74c3c, #ec7063);
+            color: white;
+        }
+
+        .delete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        /* File specific styling */
+        .file-item {
+            border-left-color: #3498db;
+        }
+
+        .video-item {
+            border-left-color: #e74c3c;
+        }
+
+        .link-item {
+            border-left-color: #9b59b6;
+        }
+
+        .file-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+
+        /* Animations */
+        @keyframes floatAround {
+            0% {
+                transform: translateY(100vh) translateX(-50px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.08;
+            }
+            90% {
+                opacity: 0.08;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(50vw) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar,
+            .content-area {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
+            
+            .item-meta {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Icons -->
+    <div class="floating-elements" id="floatingIcons"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">💻</div>
+                <div class="logo-text">
+                    <h1>Material de Apoyo</h1>
+                    <p>Diplomado en Computación</p>
+                </div>
+            </div>
+            <div class="nav-links">
+                <button onclick="goBack()" class="back-button">← Regresar</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- File Upload Section -->
+            <div class="upload-section">
+                <h3 class="section-title">📁 Subir Material</h3>
+                <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                    <div class="upload-icon">📎</div>
+                    <div class="upload-text">Seleccionar archivo o enlace</div>
+                    <div class="upload-info">
+                        Archivos: PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, ZIP<br>
+                        Enlaces de YouTube también soportados<br>
+                        <strong>Tamaño máximo: 25MB</strong>
+                    </div>
+                </div>
+                <input type="file" id="fileInput" class="file-input" 
+                       accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip">
+                
+                <!-- File details form -->
+                <div id="fileDetailsForm" style="margin-top: 20px;">
+                    <div class="form-group">
+                        <label for="resourceTitle">Título <span class="required">*</span></label>
+                        <input type="text" id="resourceTitle" placeholder="Nombre descriptivo del recurso" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="resourceType">Tipo de recurso <span class="required">*</span></label>
+                        <select id="resourceType" required>
+                            <option value="">Seleccionar tipo</option>
+                            <option value="guia">📋 Guía de Estudio</option>
+                            <option value="video">🎥 Video/Tutorial</option>
+                            <option value="archivo">📁 Archivo Comprimido</option>
+                            <option value="enlace">🔗 Enlace Externo</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="resourceUrl">URL (para videos de YouTube o enlaces)</label>
+                        <input type="url" id="resourceUrl" placeholder="https://youtu.be/... o https://...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="resourceAuthor">Subido por (opcional)</label>
+                        <input type="text" id="resourceAuthor" placeholder="Nombre del autor">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="resourceDescription">Descripción</label>
+                        <textarea id="resourceDescription" placeholder="Describe el contenido del recurso..."></textarea>
+                    </div>
+                    
+                    <button type="button" class="upload-btn" onclick="uploadResource()" id="uploadButton" disabled>
+                        Subir Recurso
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="content-area">
+            <h2 class="section-title">💻 Biblioteca de Recursos</h2>
+            
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="tab active" onclick="filterContent('todos')">Todos</button>
+                <button class="tab" onclick="filterContent('guia')">📋 Guías</button>
+                <button class="tab" onclick="filterContent('video')">🎥 Videos</button>
+                <button class="tab" onclick="filterContent('archivo')">📁 Archivos</button>
+                <button class="tab" onclick="filterContent('enlace')">🔗 Enlaces</button>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="content-grid" id="contentGrid">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Storage keys
+        const STORAGE_KEY = 'diplomado_recursos';
+        const FILE_STORAGE_KEY = 'diplomado_files';
+        
+        // Sample educational content for computer science
+        let contentData = loadFromStorage() || [
+            {
+                id: 1,
+                title: 'Introducción a la Programación en Python',
+                type: 'video',
+                url: 'https://youtu.be/f2FGgrAcOUk',
+                description: 'Tutorial completo sobre los fundamentos de Python para principiantes',
+                author: 'Prof. García',
+                uploadDate: '2024-09-20',
+                fileType: 'VIDEO',
+                size: 'YouTube'
+            },
+            {
+                id: 2,
+                title: 'manualvb.pdf',
+                type: 'guia',
+                description: 'Manual completo de Visual Basic con ejemplos y ejercicios prácticos',
+                author: 'Dr. Martínez',
+                uploadDate: '2024-09-18',
+                fileType: 'PDF',
+                size: '3.2 MB'
+            },
+            {
+                id: 3,
+                title: 'Base de Datos Relacionales - Fundamentos',
+                type: 'guia',
+                description: 'Conceptos básicos de bases de datos, normalización y SQL',
+                author: 'Ing. López',
+                uploadDate: '2024-09-15',
+                fileType: 'PDF',
+                size: '4.7 MB'
+            },
+            {
+                id: 4,
+                title: 'Algoritmos y Estructuras de Datos',
+                type: 'archivo',
+                description: 'Código fuente y ejemplos de algoritmos fundamentales',
+                author: 'Prof. Rodríguez',
+                uploadDate: '2024-09-12',
+                fileType: 'ZIP',
+                size: '12.5 MB'
+            }
+        ];
+
+        let currentFilter = 'todos';
+        let nextResourceId = Math.max(...contentData.map(r => r.id || 0)) + 1;
+
+        // Initialize floating icons
+        function createFloatingIcons() {
+            const container = document.getElementById('floatingIcons');
+            const techIcons = [
+                '💻', '🖥️', '⌨️', '🖱️', '📱', '💾', '🔧', '⚙️',
+                '📊', '📈', '🔍', '💡', '🔗', '📋', '📁', '🎯'
+            ];
+            
+            for (let i = 0; i < 15; i++) {
+                const icon = document.createElement('div');
+                icon.className = 'floating-icon';
+                icon.textContent = techIcons[Math.floor(Math.random() * techIcons.length)];
+                icon.style.left = Math.random() * 100 + '%';
+                icon.style.animationDelay = Math.random() * 30 + 's';
+                container.appendChild(icon);
+            }
+        }
+
+        // Storage functions
+        function saveToStorage() {
+            try {
+                sessionStorage.setItem(STORAGE_KEY, JSON.stringify(contentData));
+            } catch (e) {
+                console.error('Error guardando datos:', e);
+                window.diplomadoData = JSON.stringify(contentData);
+            }
+        }
+
+        function loadFromStorage() {
+            try {
+                const data = sessionStorage.getItem(STORAGE_KEY);
+                if (data) {
+                    return JSON.parse(data);
+                }
+                return window.diplomadoData ? JSON.parse(window.diplomadoData) : null;
+            } catch (e) {
+                console.error('Error cargando datos:', e);
+                return null;
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            createFloatingIcons();
+            renderContent();
+            setupEventListeners();
+            
+            if (!window.diplomadoFiles) {
+                window.diplomadoFiles = {};
+            }
+        });
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Form validation
+            const requiredFields = ['resourceTitle', 'resourceType'];
+            requiredFields.forEach(fieldId => {
+                document.getElementById(fieldId).addEventListener('input', validateForm);
+                document.getElementById(fieldId).addEventListener('change', validateForm);
+            });
+
+            // Resource type change
+            document.getElementById('resourceType').addEventListener('change', function() {
+                const urlField = document.getElementById('resourceUrl');
+                const fileInput = document.getElementById('fileInput');
+                
+                if (this.value === 'video' || this.value === 'enlace') {
+                    urlField.style.display = 'block';
+                    fileInput.style.display = 'none';
+                } else {
+                    urlField.style.display = 'none';
+                    fileInput.style.display = 'block';
+                }
+                validateForm();
+            });
+            
+            // File input change
+            document.getElementById('fileInput').addEventListener('change', validateForm);
+            document.getElementById('resourceUrl').addEventListener('input', validateForm);
+        }
+
+        // Validate form
+        function validateForm() {
+            const title = document.getElementById('resourceTitle').value.trim();
+            const type = document.getElementById('resourceType').value;
+            const url = document.getElementById('resourceUrl').value.trim();
+            const fileInput = document.getElementById('fileInput');
+            
+            const uploadBtn = document.getElementById('uploadButton');
+            
+            let isValid = title && type;
+            
+            if (type === 'video' || type === 'enlace') {
+                isValid = isValid && url;
+            } else if (type === 'guia' || type === 'archivo') {
+                isValid = isValid && fileInput.files[0];
+            }
+            
+            uploadBtn.disabled = !isValid;
+        }
+
+        // Upload resource
+        async function uploadResource() {
+            const title = document.getElementById('resourceTitle').value.trim();
+            const type = document.getElementById('resourceType').value;
+            const url = document.getElementById('resourceUrl').value.trim();
+            const author = document.getElementById('resourceAuthor').value.trim() || 'Usuario';
+            const description = document.getElementById('resourceDescription').value.trim();
+            const fileInput = document.getElementById('fileInput');
+
+            if (!title || !type) {
+                alert('Por favor completa todos los campos requeridos');
+                return;
+            }
+
+            try {
+                let newResource = {
+                    id: nextResourceId++,
+                    title: title,
+                    type: type,
+                    description: description,
+                    author: author,
+                    uploadDate: new Date().toISOString().split('T')[0]
+                };
+
+                if (type === 'video' || type === 'enlace') {
+                    if (!url) {
+                        alert('Por favor ingresa una URL válida');
+                        return;
+                    }
+                    newResource.url = url;
+                    newResource.fileType = type === 'video' ? 'VIDEO' : 'ENLACE';
+                    newResource.size = type === 'video' ? 'YouTube' : 'Web';
+                } else {
+                    const file = fileInput.files[0];
+                    if (!file) {
+                        alert('Por favor selecciona un archivo');
+                        return;
+                    }
+
+                    // Store file
+                    const fileId = 'file_' + newResource.id;
+                    await saveFileToStorage(file, fileId);
+                    
+                    newResource.fileId = fileId;
+                    newResource.fileType = file.name.split('.').pop().toUpperCase();
+                    newResource.size = `${(file.size / 1024 / 1024).toFixed(2)} MB`;
+                }
+
+                contentData.unshift(newResource);
+                saveToStorage();
+                renderContent();
+                clearForm();
+                
+                alert('¡Recurso subido exitosamente!');
+                
+            } catch (error) {
+                console.error('Error subiendo recurso:', error);
+                alert('Error al subir el recurso');
+            }
+        }
+
+        // File storage
+        function saveFileToStorage(file, fileId) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        if (!window.diplomadoFiles) {
+                            window.diplomadoFiles = {};
+                        }
+                        window.diplomadoFiles[fileId] = {
+                            data: e.target.result,
+                            name: file.name,
+                            type: file.type,
+                            size: file.size
+                        };
+                        resolve();
+                    } catch (error) {
+                        reject(error);
+                    }
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Clear form
+        function clearForm() {
+            document.getElementById('resourceTitle').value = '';
+            document.getElementById('resourceType').value = '';
+            document.getElementById('resourceUrl').value = '';
+            document.getElementById('resourceAuthor').value = '';
+            document.getElementById('resourceDescription').value = '';
+            document.getElementById('fileInput').value = '';
+            document.getElementById('uploadButton').disabled = true;
+        }
+
+        // Render content
+        function renderContent() {
+            const grid = document.getElementById('contentGrid');
+            let filteredData = currentFilter === 'todos' 
+                ? contentData 
+                : contentData.filter(item => item.type === currentFilter);
+
+            grid.innerHTML = filteredData.map(item => {
+                const icon = getTypeIcon(item.type);
+                const itemClass = `content-item ${item.type}-item`;
+                
+                return `
+                    <div class="${itemClass}">
+                        <div class="item-header">
+                            <div>
+                                <h3 class="item-title">${icon} ${item.title}</h3>
+                                <div class="item-meta">
+                                    <span>📅 ${item.uploadDate}</span>
+                                    <span>👤 ${item.author}</span>
+                                    <span>📄 ${item.fileType}</span>
+                                    <span>💾 ${item.size}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="item-content">${item.description || 'Sin descripción disponible'}</p>
+                        <div class="item-actions">
+                            ${item.type === 'video' || item.type === 'enlace' ? 
+                                `<button class="action-btn view-btn" onclick="openLink('${item.url}')">🌐 Abrir</button>` :
+                                `<button class="action-btn download-btn" onclick="downloadFile(${item.id})">📥 Descargar</button>`
+                            }
+                            <button class="action-btn delete-btn" onclick="deleteResource(${item.id})">🗑️ Eliminar</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            if (filteredData.length === 0) {
+                grid.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #7f8c8d; grid-column: 1 / -1;">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">💻</div>
+                        <h3>No hay recursos disponibles</h3>
+                        <p>Sube tu primer recurso educativo</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Get type icon
+        function getTypeIcon(type) {
+            const icons = {
+                'guia': '📋',
+                'video': '🎥',
+                'archivo': '📁',
+                'enlace': '🔗'
+            };
+            return icons[type] || '📎';
+        }
+
+        // Filter content
+        function filterContent(filter) {
+            currentFilter = filter;
+            
+            // Update active tab
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderContent();
+        }
+
+        // Open link
+        function openLink(url) {
+            if (url) {
+                window.open(url, '_blank');
+            } else {
+                alert('URL no disponible');
+            }
+        }
+
+        // Download file
+        function downloadFile(resourceId) {
+            const resource = contentData.find(r => r.id === resourceId);
+            if (!resource) {
+                alert('Recurso no encontrado');
+                return;
+            }
+
+            if (!resource.fileId) {
+                alert(`Este es un archivo de ejemplo: ${resource.title}\nNo se puede descargar.`);
+                return;
+            }
+
+            if (!window.diplomadoFiles || !window.diplomadoFiles[resource.fileId]) {
+                alert('Los datos del archivo no están disponibles para descarga');
+                return;
+            }
+
+            const fileData = window.diplomadoFiles[resource.fileId];
+            
+            try {
+                const link = document.createElement('a');
+                link.href = fileData.data;
+                link.download = fileData.name;
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                console.log('Descarga iniciada para:', resource.title);
+            } catch (error) {
+                console.error('Error en descarga:', error);
+                alert('Error al descargar el archivo');
+            }
+        }
+
+        // Delete resource
+        function deleteResource(resourceId) {
+            const resource = contentData.find(r => r.id === resourceId);
+            if (!resource) {
+                alert('Recurso no encontrado');
+                return;
+            }
+
+            if (confirm(`¿Eliminar "${resource.title}"?`)) {
+                try {
+                    // Clean up file data if exists
+                    if (resource.fileId && window.diplomadoFiles) {
+                        delete window.diplomadoFiles[resource.fileId];
+                    }
+                    
+                    // Remove from content data
+                    contentData = contentData.filter(r => r.id !== resourceId);
+                    saveToStorage();
+                    renderContent();
+                    
+                    alert('Recurso eliminado correctamente');
+                } catch (error) {
+                    console.error('Error eliminando recurso:', error);
+                    alert('Error al eliminar el recurso');
+                }
+            }
+        }
+
+        // Navigation
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = 'Pagina_promos.html';
+            }
+        }
+    </script>
+</body>
+</html>
